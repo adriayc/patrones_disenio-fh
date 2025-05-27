@@ -31,3 +31,23 @@ Temas de VSCode
 
 - Tokyo Night (Theme)
 - Bearded Icons (Icons)
+
+## Inicializar un nuevo projecto con Deno
+
+```sh
+$ deno init my-project
+$ cd my-project
+```
+
+Ejecutar el projecto
+
+```sh
+# Run the  program
+$ deno main.ts
+
+# Run the program and watch for file changes
+$ deno task dev
+
+# Run the tests
+$ deno test
+```
