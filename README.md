@@ -157,3 +157,36 @@ Pero o siempre es la más rápida.
 ### En futuras clases
 
 Vamos a cubrir 24 patrones de diseño.
+
+## Patrones Creacionales
+
+**_Creación de objetos de forma flexible._**
+
+Resuelven problemas relacionados con:
+
+- ¿Cómo crear objetos de manera eficiente?
+- Ocultar la lógica de instanciación.
+- Reducir el acoplamiento de clases.
+
+En general el objetivo es:
+
+- Mejorar la flexibilidad al cambiar el proceso de creación.
+- Promueve el principio de responsabilidad única.
+
+Existen varios tipos de patrones creacionales:
+
+- Factory Method
+- Abstract Factory
+- Builder
+- Prototype
+- Factory Function
+- Inmutabilidad con copia
+- Singleton
+
+_NOTA: Todos ayuda con la creacion de objetos._
+
+**Beneficios**
+
+- Reducción de código duplicado.
+- Mayor claridad en el proceso de creación de objetos.
+- Alineación con principio SOLID.
