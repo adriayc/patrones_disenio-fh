@@ -13,6 +13,8 @@
  * https://refactoring.guru/es/design-patterns/builder
  */
 
+import { COLORS } from '../helpers/colors.ts';
+
 class Computer {
   public cpu: string = 'cpu - not defined';
   public ram: string = 'ram - not defined';
@@ -24,7 +26,7 @@ class Computer {
         CPU: ${this.cpu}
         RAM: ${this.ram}
         STORAGE: ${this.storage}
-        GPU: ${this.gpu}
+        GPU: ${this.gpu ?? 'No tiene GPU'}
     `);
   }
 }
@@ -60,3 +62,26 @@ class ComputerBuilder {
     return this.computer;
   }
 }
+
+function main() {
+  const basicComputer: Computer = new ComputerBuilder()
+    .setCPU('Intel Core 2 Dúo')
+    .setRAM('4GB')
+    .setStorage('256GB')
+    .build();
+
+  console.log('%cComputadora básica: ', COLORS.blue);
+  basicComputer.displayConfiguration();
+
+  const gamerComputer: Computer = new ComputerBuilder()
+    .setCPU('Intel Core Ultra 9')
+    .setRAM('64GB')
+    .setStorage('2TB SSD')
+    .setGPU('NVIDIA GeForce RTX 5090')
+    .build();
+
+  console.log('%cComputadora gamer: ', COLORS.green);
+  gamerComputer.displayConfiguration();
+}
+
+main();
