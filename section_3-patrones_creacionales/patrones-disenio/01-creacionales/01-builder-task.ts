@@ -50,24 +50,40 @@ class QueryBuilder {
   }
 
   select(...fields: string[]): QueryBuilder {
-    throw new Error('Method not implement');
+    this.fields = fields;
+    return this;
   }
 
   where(condition: string): QueryBuilder {
-    throw new Error('Method not implement');
+    this.condition.push(condition);
+    return this;
   }
 
   orderBy(field: string, direction: 'ASC' | 'DESC' = 'ASC'): QueryBuilder {
-    throw new Error('Method not implement');
+    this.orderFields.push(`${field} ${direction}`);
+    return this;
   }
 
   limit(count: number): QueryBuilder {
-    throw new Error('Method not implement');
+    this.limitCount = count;
+    return this;
   }
 
   execute(): string {
     // Select id, name, email from users where age > 18 and country = 'Cri' order by name ASC limit 10;
-    throw new Error('Method not implement');
+    const fields = this.fields.length > 0 ? this.fields.join(', ') : '*';
+
+    const whereClause =
+      this.condition.length > 0 ? `where ${this.condition.join(' and ')}` : '';
+
+    const orderClause =
+      this.orderFields.length > 0
+        ? `order by ${this.orderFields.join(', ')}`
+        : '';
+
+    const limitClause = this.limitCount ? `limit ${this.limitCount}` : '';
+
+    return `select ${fields} from ${this.table} ${whereClause} ${orderClause} ${limitClause}`;
   }
 }
 
@@ -77,11 +93,17 @@ function main() {
     .where('age > 18')
     .where("country = 'Cri'") // Esto debe de hacer una condición AND
     .orderBy('name', 'ASC')
+    // .orderBy('email', 'DESC')
     .limit(10)
     .execute();
 
   console.log('%cConsulta:\n', COLORS.red);
   console.log(usersQuery);
+
+  const carsQuery = new QueryBuilder('cars').where('color = "red"').execute();
+
+  console.log('%cConsulta:\n', COLORS.green);
+  console.log(carsQuery);
 }
 
 main();
