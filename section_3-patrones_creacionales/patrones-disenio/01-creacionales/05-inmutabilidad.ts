@@ -75,3 +75,36 @@ class CodeEditorHistory {
     return null; // 0,1,2,3,4,(5)
   }
 }
+
+function main() {
+  const history = new CodeEditorHistory();
+  let editorState = new CodeEditorState('console.log("Hola Mundo");', 2, false);
+  history.save(editorState);
+
+  console.log('%cEstado inicial', COLORS.blue);
+  editorState.displayState();
+
+  console.log('%cDespués del primer cambio', COLORS.blue);
+  editorState = editorState.copyWith({
+    content: 'console.log("Hola Mundo"); \nconsole.log("Nueva línea");',
+    cursorPosition: 3,
+    unsaveChanges: true,
+  });
+  history.save(editorState);
+  editorState.displayState();
+
+  console.log('%cDespués de mover el cursor', COLORS.blue);
+  editorState = editorState.copyWith({ cursorPosition: 5 });
+  history.save(editorState);
+  editorState.displayState();
+
+  console.log('%cDespués de Undo', COLORS.blue);
+  editorState = history.undo()!;
+  editorState.displayState();
+
+  console.log('%cDespués de Redo', COLORS.blue);
+  editorState = history.redo()!;
+  editorState.displayState();
+}
+
+main();
