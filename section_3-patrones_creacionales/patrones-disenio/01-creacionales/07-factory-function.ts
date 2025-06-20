@@ -23,3 +23,15 @@ function createGreeter(lang: Language) {
     return console.log(messages[lang], COLORS.red);
   };
 }
+
+function main() {
+  const spanishGreeter = createGreeter('es');
+  const englishGreeter = createGreeter('en');
+  const franceGreeter = createGreeter('fr');
+
+  spanishGreeter('Adriano');
+  englishGreeter('Alice');
+  franceGreeter('Pierre');
+}
+
+main();
