@@ -107,3 +107,22 @@ class HomeTheaterFacade {
     console.log('%cSistema apagado\n', COLORS.blue);
   }
 }
+
+function main() {
+  const projector = new Projector();
+  const soundSystem = new SoundSystem();
+  const videoPlayer = new VideoPlayer();
+  const popcornMaker = new PopcornMaker();
+
+  const homeTheater = new HomeTheaterFacade({
+    projector,
+    soundSystem,
+    videoPlayer,
+    popcornMaker,
+  });
+
+  homeTheater.watchMovie('Los Avengers');
+  homeTheater.stopWatchMovie();
+}
+
+main();
