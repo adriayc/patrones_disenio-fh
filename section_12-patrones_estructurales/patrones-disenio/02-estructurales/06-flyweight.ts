@@ -45,6 +45,7 @@ class LocationFactory {
   // Escuela, hospital, parque, etc
   getLocationIcon(type: string): LocationIcon {
     if (!this.icons[type]) {
+      console.log(`%cCreando una instancia del ícono de ${type}`, COLORS.red);
       const iconImage = `imagen_de_${type.toLowerCase()}.png`;
       this.icons[type] = new LocationIcon(type, iconImage);
     }
@@ -52,3 +53,43 @@ class LocationFactory {
     return this.icons[type];
   }
 }
+
+class MapLocation {
+  private coordinates: { x: number; y: number };
+  private icon: LocationIcon;
+
+  constructor(x: number, y: number, icon: LocationIcon) {
+    this.coordinates = { x, y };
+    this.icon = icon;
+  }
+
+  display() {
+    this.icon.display(this.coordinates);
+  }
+}
+
+function main() {
+  const factory = new LocationFactory();
+
+  const locations = [
+    new MapLocation(10, 20, factory.getLocationIcon('hospital')),
+    new MapLocation(20, 40, factory.getLocationIcon('hospital')),
+    new MapLocation(30, 60, factory.getLocationIcon('hospital')),
+
+    new MapLocation(35, 65, factory.getLocationIcon('parque')),
+    new MapLocation(35, 65, factory.getLocationIcon('parque')),
+    new MapLocation(35, 65, factory.getLocationIcon('parque')),
+    new MapLocation(35, 65, factory.getLocationIcon('parque')),
+
+    new MapLocation(16, 36, factory.getLocationIcon('hospital')),
+    new MapLocation(16, 36, factory.getLocationIcon('hospital')),
+    new MapLocation(16, 36, factory.getLocationIcon('hospital')),
+
+    new MapLocation(16, 36, factory.getLocationIcon('escuela')),
+    new MapLocation(16, 36, factory.getLocationIcon('escuela')),
+  ];
+
+  locations.forEach((location) => location.display());
+}
+
+main();
