@@ -52,3 +52,18 @@ class MagicPortal implements Room {
     );
   }
 }
+
+function main() {
+  const portal = new MagicPortal(new SecretRoom());
+
+  const player1 = new Player('Aventurero A', 5);
+  const player2 = new Player('Aventurero B', 15);
+
+  console.log('%cAventurero A intenta entrar al protal', COLORS.blue);
+  portal.enter(player1);
+
+  console.log('%c\nAventurero A intenta entrar al protal', COLORS.blue);
+  portal.enter(player2);
+}
+
+main();
