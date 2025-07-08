@@ -10,6 +10,8 @@
  * https://refactoring.guru/es/design-patterns/chain-of-responsibility
  */
 
+import { COLORS } from '../helpers/colors.ts';
+
 // 1. Interfaz Approver
 interface Approver {
   setNext(approver: Approver): Approver;
@@ -40,28 +42,33 @@ abstract class BaseApprover implements Approver {
 
 // Clases Concretas de Aprobadores
 class Supervisor extends BaseApprover {
-  // TODO: Implementar el método approveRequest si el monto es menor o igual a 1000
-  // TODO: Si el monto es mayor a 1000, pasar la solicitud al siguiente aprobador
-
   override approveRequest(amount: number): void {
-    throw new Error('Method not implemented.');
+    if (amount <= 1000) {
+      console.log(
+        `Supervisor: %cAprueba la compra de $${amount}`,
+        COLORS.yellow
+      );
+      return;
+    }
+
+    super.next(amount);
   }
 }
 
 class Manager extends BaseApprover {
-  // TODO: Implementar el método approveRequest si el monto es menor  o igual a 5000
-  // TODO: Si el monto es mayor a 5000, pasar la solicitud al siguiente aprobador
-
   override approveRequest(amount: number): void {
-    throw new Error('Method not implemented.');
+    if (amount <= 5000) {
+      console.log(`Manager: %cAprueba la compra de $${amount}`, COLORS.orange);
+      return;
+    }
+
+    super.next(amount);
   }
 }
 
 class Director extends BaseApprover {
-  // TODO: Implementar el método approveRequest si el monto
-
   override approveRequest(amount: number): void {
-    throw new Error('Method not implemented.');
+    console.log(`Director: %cAprueba la compra de $${amount}`, COLORS.green);
   }
 }
 
