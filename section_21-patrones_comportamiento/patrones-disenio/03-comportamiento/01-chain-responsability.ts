@@ -85,3 +85,18 @@ class ExpertSupport extends BaseHandler {
     );
   }
 }
+
+function main() {
+  const basicSupport = new BasicSupport();
+  const advancedSupport = new AdvancedSupport();
+  const expertSupport = new ExpertSupport();
+
+  basicSupport.setNext(advancedSupport).setNext(expertSupport);
+
+  basicSupport.handler('básico');
+  basicSupport.handler('avanzado');
+  basicSupport.handler('experto');
+  basicSupport.handler('nuclear');
+}
+
+main();
