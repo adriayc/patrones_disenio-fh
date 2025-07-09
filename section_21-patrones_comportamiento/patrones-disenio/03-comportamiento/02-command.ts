@@ -86,3 +86,46 @@ class RemoteControl {
     console.log('%cNo se ha asignado un comando a ese botón', COLORS.red);
   }
 }
+
+function main() {
+  const remoteControl = new RemoteControl();
+  const light = new Light();
+  const fan = new Fan();
+
+  // Crear los comandos para los dispositivos
+  const lightOnCommand = new LightOnCommand(light);
+  const lightOffCommand = new LightOnCommand(light);
+
+  const fanOnCommand = new FanOnCommand(fan);
+  const fanOffCommand = new FanOnCommand(fan);
+
+  // Asignar las acciones al control remote
+  remoteControl.setCommand('1', lightOnCommand);
+  remoteControl.setCommand('2', lightOffCommand);
+  remoteControl.setCommand('3', fanOnCommand);
+  remoteControl.setCommand('4', fanOffCommand);
+
+  let continueProgram = true;
+  do {
+    console.clear();
+    const button =
+      prompt(`
+    Presione un botón del control:
+      1. Encender luz
+      2. Apagar luz
+      3. Encender ventilador
+      4. Apagar ventilador
+
+      Botón:`) ?? '';
+
+    remoteControl.pressButton(button);
+
+    const continueProgramResponse = prompt(
+      `\n¿Deseas coontinuar? (Y/n)?`
+    )?.toLowerCase();
+
+    continueProgram = continueProgramResponse === 'n' ? false : true;
+  } while (continueProgram);
+}
+
+main();
