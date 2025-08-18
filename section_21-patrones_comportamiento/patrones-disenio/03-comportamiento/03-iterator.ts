@@ -1,10 +1,10 @@
 /**
  * ! Patrón Iterador
- * Este patrón permite recorrer los elementos de una colección sin exponer la estrucra
+ * Este patrón permite recorrer los elementos de una colección sin exponer la estructura
  * interna de la colección.
  *
- * * Es útil cuando se necesita recorrer una coleccíón de elementos sin importar cómo
- * * se almacena los elementos.
+ * * Es útil cuando se necesita recorrer una coleccíón de elementos sin importar cómo se
+ * * almacena los elementos.
  *
  * https://refactoring.guru/es/design-patterns/iterator
  */
@@ -44,10 +44,36 @@ class PokemonCollection {
     return this.pokemons.length;
   }
 
-  // TODO
-  createIterator() {
-    throw new Error('No implemented.');
+  createIterator(): PokemonIterator {
+    return new PokemonIterator(this); // this hace referencia al objeto actual
   }
 }
 
-class PokemonIterator implements Iterator<Pokemon> {}
+class PokemonIterator implements Iterator<Pokemon> {
+  private collection: PokemonCollection;
+  private position: number = 0;
+
+  constructor(collection: PokemonCollection) {
+    this.collection = collection;
+  }
+
+  next(): Pokemon | null {
+    if (this.hasNext()) {
+      return this.collection.getPokemonAt(this.position++);
+    }
+
+    return null;
+  }
+
+  hasNext(): boolean {
+    return this.position < this.collection.getLength();
+  }
+
+  current(): Pokemon | null {
+    return this.collection.getPokemonAt(this.position);
+  }
+}
+
+function main() {}
+
+main();
