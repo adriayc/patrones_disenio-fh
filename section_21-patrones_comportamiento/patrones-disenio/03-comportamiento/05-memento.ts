@@ -92,3 +92,35 @@ class GameHistory {
     return this.mementos.pop() ?? null;
   }
 }
+
+function main() {
+  const game = new Game();
+  const history = new GameHistory();
+
+  history.push(game.save());
+
+  // Jugador avanza en el juego
+  game.play(2, 90, 'Bosque Encantado');
+  history.push(game.save());
+
+  game.play(3, 70, 'Cueva Oscura');
+  history.push(game.save());
+
+  game.play(4, 50, 'Castillo del Dragón');
+  console.log(`\n%cEstado acutal`, COLORS.green);
+
+  game.restore(history.pop()!);
+  console.log(
+    `\n%cDespués de restaurar el último estado guardado`,
+    COLORS.green
+  );
+
+  game.restore(history.pop()!);
+  console.log(
+    `\n%cDespués de restaurar el último estado guardado`,
+    COLORS.green
+  );
+  console.log('\n\n');
+}
+
+main();
