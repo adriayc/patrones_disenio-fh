@@ -52,7 +52,7 @@ class User {
   sendMessage(message: string): void {
     console.log(
       `\n\n\n%c${this.username} envía: %c${message}`,
-      COLORS.blue,
+      COLORS.green,
       COLORS.white
     );
     this.chatRoom.sendMessage(this, message);
@@ -66,3 +66,17 @@ class User {
     );
   }
 }
+
+function main() {
+  const chatRoom = new ChatRoom('Grupo de trabajo');
+
+  const user1 = new User('Adriano', chatRoom);
+  const user2 = new User('Karla', chatRoom);
+  const user3 = new User('Daniela', chatRoom);
+
+  user1.sendMessage('Hola a todos!');
+  user2.sendMessage('Hola Adriano, ¿Como estás?');
+  user3.sendMessage('Hola Adriano, Karla , ¿Como estás?');
+}
+
+main();
