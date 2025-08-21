@@ -66,3 +66,36 @@ class subscriber implements Observer {
     );
   }
 }
+
+function main() {
+  const channel = new YouTubeChannel('Concinado con Adriano');
+
+  const karla = new subscriber('Karla');
+  const diana = new subscriber('Diana');
+  const diego = new subscriber('Diego');
+
+  channel.subscribe(karla);
+  channel.subscribe(diana);
+
+  channel.uploadVideo('Receta de Tamales de Maiz');
+
+  channel.subscribe(diego);
+
+  channel.uploadVideo('Receta de Chuletas de Cerdo');
+
+  channel.unsubscribe(diana);
+
+  channel.uploadVideo('Receta Sopa de Verduras');
+
+  channel.unsubscribe(diego);
+
+  channel.uploadVideo('Receta Carne Asada');
+
+  channel.unsubscribe(karla);
+
+  channel.uploadVideo('Receta Pollo a la Plancha');
+
+  console.log('\n\n');
+}
+
+main();
