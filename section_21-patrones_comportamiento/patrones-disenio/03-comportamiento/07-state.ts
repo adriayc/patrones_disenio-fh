@@ -31,7 +31,7 @@ class VendingMachine {
   private state: State;
 
   constructor() {
-    // TODO: estado inicial
+    this.state = new WaitingForMoney(this);
   }
 
   insertMoney() {
@@ -71,13 +71,65 @@ class WaitingForMoney implements State {
       COLORS.green
     );
 
-    // TODO:
-    // this.vendingMachine.setState();
+    this.vendingMachine.setState(new ProductSelected(this.vendingMachine));
   }
   selectProduct(): void {
     console.log(`%cPrimero debes de insertar dinero.`, COLORS.red);
   }
   dispenseProduct(): void {
     console.log(`%cPrimero debes de insertar dinero.`, COLORS.red);
+  }
+}
+
+class ProductSelected implements State {
+  public name: string = 'Seleccionando Producto';
+  private vendingMachine: VendingMachine;
+
+  constructor(vendingMachine: VendingMachine) {
+    this.vendingMachine = vendingMachine;
+  }
+
+  insertMoney(): void {
+    console.log(
+      '%cPor favor selecciona un producto - Dinero ya insertado',
+      COLORS.red
+    );
+  }
+
+  selectProduct(): void {
+    this.vendingMachine.setState(new DispensingProduct(this.vendingMachine));
+  }
+
+  dispenseProduct(): void {
+    console.log(
+      '%cPor favor selecciona un producto - Antes de despacharlo',
+      COLORS.red
+    );
+  }
+}
+
+class DispensingProduct implements State {
+  public name: string = 'Despachando Producto';
+  private vendingMachine: VendingMachine;
+
+  constructor(vendingMachine: VendingMachine) {
+    this.vendingMachine = vendingMachine;
+  }
+
+  insertMoney(): void {
+    console.log('%cPor favor espera a que se entregue el producto', COLORS.red);
+  }
+
+  selectProduct(): void {
+    console.log('%cProducto ya seleccionado y despachando', COLORS.red);
+  }
+
+  dispenseProduct(): void {
+    console.log(
+      '%cProducto despachado - Cambiando estado a "Esperando Dinero"',
+      COLORS.green
+    );
+
+    this.vendingMachine.setState(new WaitingForMoney(this.vendingMachine));
   }
 }
