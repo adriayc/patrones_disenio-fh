@@ -66,26 +66,31 @@ abstract class RoomCleaning {
   }
 
   // Método abstracto para limpieza especifica
-  // TODO: Implementar el método specificCleaning en las subclases
-  // protected abstract? ambas?
+  protected abstract specificCleaning(): void;
 }
 
 // Subclase - HotelRoomCleaning
 class HotelRoomCleaning extends RoomCleaning {
-  // TODO: Implementar método especifico
   // Mensaje: 'Haciendo las camas y reponiendo articulos de baño'
+  protected override specificCleaning(): void {
+    console.log('Haciendo las camas y reponiendo articulos de baño');
+  }
 }
 
 // Subclase - ConferenceRoomCleaning
 class ConferenceRoomCleaning extends RoomCleaning {
-  // TODO: Implementar método especifico
   // Mensaje: 'Limpiando mesas y organizando sillas.'
+  protected override specificCleaning(): void {
+    console.log('Limpiando mesas y organizando sillas.');
+  }
 }
 
 // Subclase - OfficeCleaning
 class OfficeCleaning extends RoomCleaning {
-  // TODO: Implementar método especifico
   // Mensaje: 'Limpiando escritorios y organizando documentos.'
+  protected override specificCleaning(): void {
+    console.log('Limpiando escritorios y organizando documentos.');
+  }
 }
 
 // Código Cliente
