@@ -9,6 +9,7 @@
  */
 
 import { COLORS } from '../helpers/colors.ts';
+import { sleep } from '../helpers/sleep.ts';
 
 /**
  * Objetivo: Implementar el patrón State para simular el funcionamiento de una máquina expendedora.
@@ -133,3 +134,48 @@ class DispensingProduct implements State {
     this.vendingMachine.setState(new WaitingForMoney(this.vendingMachine));
   }
 }
+
+async function main() {
+  const vendingMachine = new VendingMachine();
+
+  let selectedOption: string | null = '4';
+
+  do {
+    console.clear();
+    console.log(
+      `Selecciona una opción: %c${vendingMachine.getStateName()}`,
+      COLORS.blue
+    );
+
+    selectedOption = prompt(
+      `
+        1. Inserte dinero
+        2. Seleccionar producto
+        3. Dispensar producto
+        4. Salir
+
+        opción:`
+    );
+
+    switch (selectedOption) {
+      case '1':
+        vendingMachine.insertMoney();
+        break;
+      case '2':
+        vendingMachine.selectProduct();
+        break;
+      case '3':
+        vendingMachine.dispenseProduct();
+        break;
+      case '4':
+        console.log('Saliendo del sistema');
+        break;
+      default:
+        console.log('Option no válida');
+    }
+
+    await sleep(3000);
+  } while (selectedOption !== '4');
+}
+
+main();
