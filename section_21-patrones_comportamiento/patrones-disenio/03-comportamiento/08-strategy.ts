@@ -24,21 +24,21 @@ interface MovementStrategy {
 // Estrategia #1 - Rápida pero costosa
 class SwimFast implements MovementStrategy {
   move(): void {
-    console.log('%cEl pato nada rápidamente sobre el agua', COLORS.blue);
+    console.log('%cEl pato nada rápidamente sobre el agua\n', COLORS.blue);
   }
 }
 
 // Estrategia #2 - No rápida pero no tan costosa
 class FlyOverWater implements MovementStrategy {
   move(): void {
-    console.log('%cEl pato vuela elegantemente sobre el agua', COLORS.pink);
+    console.log('%cEl pato vuela elegantemente sobre el agua\n', COLORS.pink);
   }
 }
 
 // Estrategia #3 - Lenta y económica
 class WalkClumsily implements MovementStrategy {
   move(): void {
-    console.log('%cEl pato camina torpemente por la orrilla', COLORS.green);
+    console.log('%cEl pato camina torpemente por la orrilla\n', COLORS.green);
   }
 }
 
@@ -69,3 +69,22 @@ class Duck {
     console.log(`${this.name} cambió de estrategia.`);
   }
 }
+
+function main() {
+  const duck1 = new Duck('Patito rápido', new SwimFast());
+  const duck2 = new Duck('Patito volador', new FlyOverWater());
+  const duck3 = new Duck('Patito torpe', new WalkClumsily());
+
+  console.log('%cComienza la carrera de patos!', COLORS.red);
+  duck1.performanceMove();
+  duck2.performanceMove();
+  duck3.performanceMove();
+
+  duck3.setMovementStrategy(new FlyOverWater());
+  duck3.performanceMove();
+
+  duck3.setMovementStrategy(new SwimFast());
+  duck3.performanceMove();
+}
+
+main();
