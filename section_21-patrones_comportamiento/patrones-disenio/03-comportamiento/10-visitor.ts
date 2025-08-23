@@ -9,6 +9,8 @@
  * https://refactoring.guru/es/design-patterns/visitor
  */
 
+import { COLORS } from '../helpers/colors.ts';
+
 /**
  * Contexto: Imagina que estás diseñando un sistema para un parque temático con diferentes tipos de
  * atracciones: montañas rusas, casas del terror y ruedas de la fortuna.
@@ -29,6 +31,7 @@ interface Visitor {
 
 interface Attraction {
   accept(visitor: Visitor): void;
+  getPrice(): number;
 }
 
 class RollerCoaster implements Attraction {
@@ -139,3 +142,29 @@ class SeniorVisitor implements Visitor {
     );
   }
 }
+
+function main() {
+  const attractions: Attraction[] = [
+    new RollerCoaster(),
+    new HauntedHouse(),
+    new FerrisWheel(),
+  ];
+
+  console.log(`Montaña Rusa: ${new RollerCoaster().getPrice()}`);
+  console.log(`Casa del Terror: ${new RollerCoaster().getPrice()}`);
+  console.log(`La Rueda de la fortuna: ${new RollerCoaster().getPrice()}`);
+
+  console.log('\n%cVisitante Niño', COLORS.green);
+  const childVisitor = new ChildVisitor();
+  attractions.forEach((attraction) => attraction.accept(childVisitor));
+
+  console.log('\n%cVisitante Adulto', COLORS.yellow);
+  const adultVisitor = new AdultVisitor();
+  attractions.forEach((attraction) => attraction.accept(adultVisitor));
+
+  console.log('\n%cVisitante Adulto Mayor', COLORS.brown);
+  const seniorisitor = new SeniorVisitor();
+  attractions.forEach((attraction) => attraction.accept(seniorisitor));
+}
+
+main();
