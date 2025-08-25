@@ -44,6 +44,7 @@ Ejecutar el projecto
 ```sh
 # Run the  program
 $ deno main.ts
+$ deno --watch main.ts
 
 # Run the program and watch for file changes
 $ deno task dev
