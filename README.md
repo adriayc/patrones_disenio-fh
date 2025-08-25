@@ -191,3 +191,17 @@ _NOTA: Todos ayuda con la creacion de objetos._
 - Reducción de código duplicado.
 - Mayor claridad en el proceso de creación de objetos.
 - Alineación con principio SOLID.
+
+## Patrones Estructurales
+
+**_Explican cómo construir objetos y estructuras más grandes._**
+
+Existen varios tipos de patrones creacionales:
+
+- Adapter
+- Bridge
+- Composite
+- Decorator
+- Facade
+- Flyweight
+- Proxy
